@@ -25,6 +25,7 @@ public class Fichero {
     public void grabar(Object o){
         try { 
             XMLEncoder codificador = new XMLEncoder(new FileOutputStream(new File(nombre)));
+            codificador.writeObject(o);
         } catch (FileNotFoundException ex) {
             System.out.println("Error no se ha podido grabar: " + ex.getMessage());
         }

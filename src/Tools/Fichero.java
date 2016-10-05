@@ -4,8 +4,10 @@
  */
 package Tools;
 
+import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.logging.Level;
@@ -26,8 +28,19 @@ public class Fichero {
         try { 
             XMLEncoder codificador = new XMLEncoder(new FileOutputStream(new File(nombre)));
             codificador.writeObject(o);
+            codificador.close();
         } catch (FileNotFoundException ex) {
             System.out.println("Error no se ha podido grabar: " + ex.getMessage());
+        }
+    }
+    
+    public Object leer() {
+        try {
+            XMLDecoder decodificador = new XMLDecoder(new FileInputStream(new File(nombre)));
+            return decodificador.readObject();
+        } catch (FileNotFoundException ex) {
+            System.out.println("No existe el fichero todavia");
+            return null;
         }
     }
 }
